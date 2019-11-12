@@ -1,4 +1,6 @@
 
+This is a forked repository of the below.
+
 # 🤔Why?🤔
 A regular question regarding [GrapesJS](https://grapesjs.com/) - the wonderful HTML layout editor written in Javascript - 
 is how to integrate it with React components:
@@ -23,7 +25,7 @@ My concrete plan was to implement something like
 # 🚀How?🚀
 
 ## 🍇 A GrapesJS plugin, block, component (and trait, button, command)
-
+																																													
 To display a React component in the canvas I needed a [plugin](src/timer/index.js),
 which provides a GrapesJS [component](src/timer/components.jsx). This component implements `ComponentsView`'s 
 `onRender` function. This is practically needs to be something like:
