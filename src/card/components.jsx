@@ -15,31 +15,47 @@
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ReactCardPreview from 'react-card-preview' // or-ui-base (REACT COMPONENT exported)
+import axios from 'axios'
+import validUrl  from 'valid-url'
+
 import { cardRef } from './consts'
+import Material from './Material'
+
 
 export default function (editor, opt = {}) {
+	let URL = [[{ "nameAR": "المملكة العربية السعودية", "nameEN": "Saudi Arabia", "id": "5c24dc26dc10670017e40921", "createdAt": "2020-06-10T19:51:40.452Z", "updatedAt": "2020-06-10T19:51:40.452Z" }]]
 	const domc = editor.DomComponents
 	const defaultType = domc.getType ('default')
 	const defaultModel = defaultType.model
 	const defaultView = defaultType.view
+
+
 	
 	domc.addType (cardRef, {
 		
 		model: defaultModel.extend ({
 			defaults: {
 				...defaultModel.prototype.defaults,
-				droppable: false,
+				droppable: true,
 				traits: [
 					{
-						name: 'placeholder',
+						label: 'New href',
+						name: 'URL',
+						type: 'text',
+						changeProp: 1,
+						placeholder: 'Insert DB URL'
+						
+					}, {
+						label: 'Display label',
+						name: 'displayLabel',
+						type: 'checkbox',
 						changeProp: 1,
 					}
 				]
 			},
 		}, {
 			isComponent (el) {
-				console.log ('isComponent', el)
+			//	console.log ('isComponent', el)
 				//debugger;
 				if ((
 					el.getAttribute && el.getAttribute ('data-gjs-type') == cardRef
@@ -58,19 +74,45 @@ export default function (editor, opt = {}) {
 			// Listen to changes of startFrom, timerLabel or displayLabels managed by the traits
 			init () {
 				// this.listenTo(this.model, 'change:startFrom change:timerLabel change:displayLabels', this.handleChanges);
-				console.log ('init() method from /components.jsx removed')
+				this.listenTo(this.model, 'change:URL change:displayLabel', this.handleChanges);
+
 			},
 			
 			// Called whenever startFrom, timerLabel or displayLabels changes
-			handleChanges (e) {
+			handleChanges () {
 				/// Force rerender
 				// Make sure we start react from scratch for el
 				// ReactDOM.unmountComponentAtNode(this.el);
 				// this.render();
-				console.log ('handleChanges() method from /components.jsx removed')
+			//	console.log ('handleChanges() method from /components.jsx removed')
+
+				
+
+				//console.log(this.model)
+
+				if (validUrl.isUri(this.model.attributes.URL)) {
+
+					axios.get(`${this.model.attributes.URL}`)
+						.then(response => {
+							URL.length < 1 ? URL.push(response.data) : doThis();
+							function doThis() {
+								URL = []
+								URL.push(response.data)
+							}
+							ReactDOM.unmountComponentAtNode(this.el);
+							this.render();
+
+						})
+
+				} else {
+					alert("please type a correct URL")
+				}
+						
+										
 			},
 			
-			onRender ({ el }) {
+			onRender({ el }) {
+				console.log(el)
 				// Calc initialTime. If startFrom is set in the trait, then calculate, otherwise leave it 0
 				// let initialTime = 0;
 				
@@ -132,7 +174,7 @@ export default function (editor, opt = {}) {
 				const comps = this.model.get ('components')
 				comps.reset ()
 				const compString =
-					`<ReactCardPreview> </ReactCardPreview>`
+					`<Material />`
 				comps.add (compString)
 				
 				// And this will be the "live" view of the timer. How this live view relates to the actual
@@ -143,13 +185,9 @@ export default function (editor, opt = {}) {
 				// now we generate the labels previously stored as "attributes"
 				ReactDOM.render (
 					<>
-						<ReactCardPreview
-							name="Tom Jones"
-							brand="mastercard"
-							expiry="11/23"
-							cvc="112"
-							lastFourDigits="4242"
-						/>
+						<div>
+							<Material data={URL[0]} /> 
+						</div>
 					</>
 					, el)
 			},

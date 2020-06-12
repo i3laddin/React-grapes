@@ -47,7 +47,7 @@ export default function addTimerPlugin(setHtmlString, setCssString) {
 
             // Days label text used in component
             labelDays: 'days',
-
+ 
             // Hours label text used in component
             labelHours: 'hours',
 

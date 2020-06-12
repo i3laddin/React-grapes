@@ -1,0 +1,19 @@
+.parent {
+    display: flex;
+    width: 500px;
+    height: 500px;
+    border: 2px solid red;
+}
+.chill1 {
+    width: 50%;
+    height: 100%;
+    border: 2px solid green;
+    background-color: green;
+
+}
+.chill2 {
+    width: 50%;
+    height: 100%;
+    border: 2px solid blue;
+    background-color: blue;
+}

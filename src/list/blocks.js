@@ -23,7 +23,7 @@ export default function (editor, opt = {}) {
     bm.remove(listRef);
     // if (c.blocks.indexOf(listRef) >= 0) {
     bm.add(listRef, {
-        label: c.blockLabel,
+        label: "List",
         category: c.blockLabel,
         attributes: {class: 'fa fa-clock-o'},
         content: `

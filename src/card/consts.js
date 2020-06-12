@@ -1,6 +1,6 @@
 
 // The timer components reference name, ie. the block's name and the component's name
-export const cardRef = 'card';
+export const cardRef = 'table';
 
 // The plugin's reference. Must be passed to <GEditor plugins=[{...}]/>
 export const cardPluginRef = 'card-plugin';

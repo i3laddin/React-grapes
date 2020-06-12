@@ -5,7 +5,7 @@
  */
 
 import grapesjs from 'grapesjs';
-import loadComponents from './components';
+import loadComponents from './components'; 
 import loadBlocks from './blocks';
 import loadCommands from './commands';
 import loadPanels from './panels';
@@ -22,7 +22,15 @@ export default function addCardPlugin() {
         let c = opts;
 
         let defaults = {
-            blocks: [cardRef],
+            blocks: [cardPluginRef],
+
+            blockLabel: 'Table',
+
+            // Category in block
+            blockCategory: 'Extra',
+
+            // Default style
+            defaultStyle: true,
 
         };
 
@@ -42,7 +50,7 @@ export default function addCardPlugin() {
         loadCommands(editor, c);
 
         // Load panels
-        loadPanels(editor, c);
+        loadPanels(editor, c); 
 
         // HACK: we need to replace the default HTML parser with our own, so that things won't be lowercased
         // grapesjs doesn't have a public API to provide a custom html parser

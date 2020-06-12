@@ -13,12 +13,17 @@
  * - timerLabel: the label to display in front of the timer
  * - displayLabels: if unchecked displays time as 19, 22:10:15. If checked: 19 days 20 hours 10 minutes 15 seconds.
  */
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+
 import ReactDOM from 'react-dom';
 import Timer from 'react-compound-timer';
-import {timerRef} from "./consts";
+import { timerRef } from "./consts";
+
+
 
 export default function (editor, opt = {}) {
+
     const c = opt;
     const domc = editor.DomComponents;
     const defaultType = domc.getType('default');
@@ -26,6 +31,7 @@ export default function (editor, opt = {}) {
     const defaultView = defaultType.view;
     const pfx = c.timerClsPfx;
 
+    
     domc.addType(timerRef, {
 
         model: defaultModel.extend({
@@ -83,6 +89,8 @@ export default function (editor, opt = {}) {
                 // Make sure we start react from scratch for el
                 ReactDOM.unmountComponentAtNode(this.el);
                 this.render();
+            //    console.log("hello world");
+                
             },
 
             onRender({el}) {

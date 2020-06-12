@@ -14,22 +14,23 @@ export default function (editor, opt = {}) {
     // These are the styles that can be used both in the components and in the live view. See component.js onRender().
     // These styles will also appear in the template's css.
     // NOTE: only styles that have '.timer' in them will be put into the template's css.
-    const style = c.defaultStyle ? `<style>
-    .card {
+    /*const style = c.defaultStyle ? `<style>
+    .table {
+      font-size: 34px;
       text-align: center;
       font-family: Helvetica, serif;
     }
   </style>` : '';
+  */
 
     bm.remove(cardRef);
     // if (c.blocks.indexOf(timerRef) >= 0) {
     bm.add(cardRef, {
-        label: 'Credit Card 2020',
+        label: 'Tabel',
         category: c.blockLabel,
         attributes: {class: 'fa fa-clock-o'},
         content: `
-        <div class="card" data-gjs-type="${cardRef}"></div>
-        ${style}
+        <div class="table" data-gjs-type="${cardRef}"></div>
       `
     });
     // }
