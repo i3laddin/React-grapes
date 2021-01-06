@@ -10,7 +10,7 @@
     "@types/react-dom": "16.9.1",
     "ag-grid-community": "^23.2.0",
     "ag-grid-react": "^23.2.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "beautiful-dom": "^1.0.7",
     "clsx": "^1.1.1",
     "final-form": "^4.18.6",
